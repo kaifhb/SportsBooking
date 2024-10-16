@@ -5,6 +5,8 @@
 # Game Theory Web Application
 
 **College ID:** (IEC2021046)
+---
+
 **Project Overview**  
 This is a web application designed to allow users to book sports courts at various facilities, view available slots, and manage bookings. The application consists of a **frontend** built using React and Vite for a seamless user interface, and a **backend** developed with Express.js and MongoDB, ensuring secure and efficient data management.
 

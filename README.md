@@ -1,18 +1,15 @@
 
-
-### Revised README
+---
 
 # Game Theory Web Application
 
-**College ID:** (IEC2021046)
----
+**College ID:** IEC2021046
 
-**Project Overview**  
-This is a web application designed to allow users to book sports courts at various facilities, view available slots, and manage bookings. The application consists of a **frontend** built using React and Vite for a seamless user interface, and a **backend** developed with Express.js and MongoDB, ensuring secure and efficient data management.
+## Project Overview
 
----
+This is a web application that allows users to book sports courts at different facilities, check available times, and manage their bookings. The application includes a frontend built with React and Vite for an easy-to-use interface, and a backend developed with Express.js and MongoDB for secure and efficient data management.
 
-### Table of Contents
+## Table of Contents
 
 - [Live Demo](#live-demo)
 - [Features](#features)
@@ -25,59 +22,53 @@ This is a web application designed to allow users to book sports courts at vario
 - [Dependencies](#dependencies)
 - [Special Instructions](#special-instructions)
 
----
+## Live Demo
 
-### Live Demo
+You can access live versions of the frontend and backend applications through these links:
 
-Access live versions of the frontend and backend applications via the following links:
+- **Frontend:** [Live Frontend](https://sports-booking-frontend.vercel.app)
+- **Backend:** [Live Backend](https://game-theory-backend.onrender.com)
 
-- **Frontend:** [https://sports-booking-frontend.vercel.app](https://sports-booking-frontend.vercel.app)
-- **Backend:** [https://game-theory-backend.onrender.com](https://sportsbookingbackend-d0cz.onrender.com)
+## Features
 
----
+- **User Authentication:** Secure login and registration using JWT tokens.
+- **Real-time Booking System:** Users can view and book available sports court slots.
+- **Responsive Design:** The UI adjusts to different screen sizes for a better experience.
+- **Data Security:** Sensitive information is managed with environment variables and secure connections.
 
-### Features
+## Project Structure
 
-1. **User Authentication:** Secure login and registration using JWT tokens.
-2. **Real-time Booking System:** Users can view and book available sports court slots.
-3. **Responsive Design:** The UI adapts to different screen sizes for optimal user experience.
-4. **Data Security:** All sensitive information is managed using environment variables and secure connections.
+### Backend
 
----
+The backend manages all API requests, user authentication, and database interactions.
 
-### Project Structure
+- **config/**: Configuration files, including database connections.
+- **controller/**: Logic for API routes, managing authentication and bookings.
+- **model/**: MongoDB schemas for users, bookings, and court information.
+- **routes/**: Definitions for all API routes.
+- **middleware/**: Custom middleware, such as authentication checks.
 
-**Backend**  
-The backend handles all API requests, user authentication, and database interactions.
+### Frontend
 
-- **config/**: Holds configuration files, such as database connections.
-- **controller/**: Defines the logic behind the API routes, handling authentication and bookings.
-- **model/**: MongoDB schemas for users, bookings, and court data.
-- **routes/**: Contains all the API route definitions for the application.
-- **middleware/**: Holds custom middleware such as authentication checks.
+The frontend is created using React and Vite for quick development.
 
-**Frontend**  
-The frontend is built using React and Vite for fast development.
+- **src/**: Source files for the frontend.
+  - **Components/**: Reusable components like buttons and forms.
+  - **Pages/**: Application pages, including login, booking, and sports court displays.
+  - **utils/**: Helper functions for managing dates, authentication, etc.
+- **App.jsx**: The main component that manages routing and page display.
 
-- **src/**: Contains all the source files for the frontend.
-  - **Components/**: Reusable components such as buttons, forms, etc.
-  - **Pages/**: Pages of the application such as login, booking, and sports court display.
-  - **utils/**: Helper functions and utilities for managing dates, authentication, etc.
-  - **App.jsx**: The root component that handles routing and page management.
+## Prerequisites
 
----
+Make sure you have the following installed:
 
-### Prerequisites
+- **Node.js:** Download from [nodejs.org](https://nodejs.org)
+- **npm:** Comes with Node.js for package management.
+- **Git:** For version control (optional but recommended).
 
-Ensure you have the following installed before starting:
+## Installation
 
-- **Node.js**: Download from [nodejs.org](https://nodejs.org)
-- **npm**: Comes with Node.js for package management.
-- **Git**: For version control. (Optional but recommended)
-
----
-
-### Installation
+To set up the project, follow these steps:
 
 1. **Clone the repository:**
 
@@ -100,11 +91,9 @@ Ensure you have the following installed before starting:
    npm install
    ```
 
----
+## Running the Application
 
-### Running the Application
-
-To run the application locally:
+To run the application on your local machine:
 
 1. **Start the Backend:**
 
@@ -113,7 +102,7 @@ To run the application locally:
    npm start
    ```
 
-   The backend API will be running at `http://localhost:5000`.
+   The backend API will run at [http://localhost:5000](http://localhost:5000).
 
 2. **Start the Frontend:**
 
@@ -122,96 +111,48 @@ To run the application locally:
    npm start
    ```
 
-   The frontend will be accessible at `http://localhost:3000`.
+   The frontend will be available at [http://localhost:3000](http://localhost:3000).
 
----
+## Deployment
 
-### Deployment
+The application is deployed using Vercel for the frontend and Render.com for the backend.
 
-The application is deployed using **Vercel** for the frontend and **Render.com** for the backend.
+### Frontend Deployment
 
-- **Frontend Deployment:**
-  - Connect your GitHub repository to Vercel.
-  - Set up your environment variables in Vercel’s dashboard.
-  - Deploy the application directly with automated builds.
+1. Connect your GitHub repository to Vercel.
+2. Set up your environment variables in Vercel’s dashboard.
+3. Deploy the application with automated builds.
 
-- **Backend Deployment:**
-  - Use Render to deploy the backend as a web service.
-  - Configure necessary environment variables like `MONGO_URI`, `JWT_SECRET`, and `PORT` in the Render dashboard.
+### Backend Deployment
 
----
+1. Use Render to deploy the backend as a web service.
+2. Configure necessary environment variables like `MONGO_URI`, `JWT_SECRET`, and `PORT` in the Render dashboard.
 
-### Assumptions and Limitations
+## Assumptions and Limitations
 
 - **Authentication:** JWT tokens are stored securely on the client side.
 - **Slot Availability:** The system fetches real-time data for available slots from the backend.
-- **Date Range:** The system currently supports booking within a 7-day window.
+- **Date Range:** The system currently supports bookings within a 7-day window.
 
----
+## Dependencies
 
-### Dependencies
+### Frontend:
 
-**Frontend:**
 - React
 - Chakra UI
 - React Router DOM
 
-**Backend:**
+### Backend:
+
 - Express.js
 - MongoDB with Mongoose
 - JWT for authentication
 - bcryptjs for password hashing
 
----
+## Special Instructions
 
-### Special Instructions
-
-1. **Environment Variables:** Ensure all sensitive data such as JWT secrets and database URIs are managed securely.
-2. **Styling Conflicts:** Use only Chakra UI or CSS-in-JS to avoid conflicts with other styling libraries.
+- **Environment Variables:** Ensure that all sensitive information, like JWT secrets and database URIs, is stored securely.
+- **Styling Conflicts:** Use only Chakra UI or CSS-in-JS to avoid issues with other styling libraries.
 
 ---
-### Revised Project File Structure
 
-```
-/GameTheory
-  ├── Backend
-  │   ├── config/
-  │   ├── controller/
-  │   ├── middleware/
-  │   ├── model/
-  │   ├── routes/
-  │   ├── node_modules/
-  │   ├── .env
-  │   ├── index.js
-  │   ├── package-lock.json
-  │   └── package.json
-  ├── frontend
-  │   ├── node_modules/
-  │   ├── public/
-  │   │   └── vite.svg
-  │   ├── src/
-  │   │   ├── assets/
-  │   │   ├── Components/
-  │   │   ├── Pages/
-  │   │   │   ├── BookCourtPage.jsx
-  │   │   │   ├── CentresDisplayPages.jsx
-  │   │   │   ├── LoginPage.jsx
-  │   │   │   ├── RegistrationPage.jsx
-  │   │   │   └── SportsDisplayPage.jsx
-  │   │   ├── App.jsx
-  │   │   ├── main.jsx
-  │   │   └── utils/
-  │   ├── .env
-  │   ├── constants.js
-  │   ├── eslint.config.js
-  │   ├── index.html
-  │   ├── package-lock.json
-  │   ├── package.json
-  │   ├── postcss.config.js
-  │   ├── README.md
-  │   ├── tailwind.config.js
-  │   └── vite.config.js
-  └── README.md
-```
-
----

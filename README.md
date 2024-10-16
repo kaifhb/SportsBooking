@@ -25,7 +25,7 @@ This is a web application that allows users to book sports courts at different f
 ## Live Demo
 
 You can access live versions of the frontend and backend applications through these links:
-
+- **Documnetation link** [SportsBooking Documentation](https://drive.google.com/file/d/1sSQnFmCiQPu-fqNYm9ycVu4-UYPp1WhX/view?usp=drive_link)
 - **Frontend:** [Live Frontend](https://sports-booking-frontend.vercel.app)
 - **Backend:** [Live Backend](https://game-theory-backend.onrender.com)
 
@@ -55,7 +55,6 @@ The frontend is created using React and Vite for quick development.
 - **src/**: Source files for the frontend.
   - **Components/**: Reusable components like buttons and forms.
   - **Pages/**: Application pages, including login, booking, and sports court displays.
-  - **utils/**: Helper functions for managing dates, authentication, etc.
 - **App.jsx**: The main component that manages routing and page display.
 
 ## Prerequisites
@@ -73,7 +72,7 @@ To set up the project, follow these steps:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/GameTheory.git
+   git clone https://github.com/kaifhb/SportsBooking.git
    cd GameTheory
    ```
 
@@ -132,14 +131,12 @@ The application is deployed using Vercel for the frontend and Render.com for the
 
 - **Authentication:** JWT tokens are stored securely on the client side.
 - **Slot Availability:** The system fetches real-time data for available slots from the backend.
-- **Date Range:** The system currently supports bookings within a 7-day window.
 
 ## Dependencies
 
 ### Frontend:
 
 - React
-- Chakra UI
 - React Router DOM
 
 ### Backend:
@@ -152,7 +149,7 @@ The application is deployed using Vercel for the frontend and Render.com for the
 ## Special Instructions
 
 - **Environment Variables:** Ensure that all sensitive information, like JWT secrets and database URIs, is stored securely.
-- **Styling Conflicts:** Use only Chakra UI or CSS-in-JS to avoid issues with other styling libraries.
+- **Styling Conflicts:** Use only Tailwind CSS  to avoid issues with other styling libraries.
 
 ---
 

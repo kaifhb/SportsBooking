@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { backURL } from "../../constants";
 
 const SportsDisplayPage = () => {
   const [searchParams] = useSearchParams();
@@ -18,7 +19,7 @@ const SportsDisplayPage = () => {
 
         const response = await axios.get(
           `${
-            import.meta.env.VITE_API_URL
+            backURL
           }/api/sport/getSportAtCentre?centreId=${centerId}`,
           {
             headers: {

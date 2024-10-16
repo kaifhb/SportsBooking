@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom'; // Import Link for navigation
 import axios from 'axios'; // Import Axios
-
+import { backURL } from '../../constants';
 const LoginPage = () => {
   const navigate = useNavigate();
   
@@ -21,7 +21,7 @@ const LoginPage = () => {
     setLoading(true);
     setMessage(null);
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/login`, formData, {
+      const res = await axios.post(`${backURL}/api/user/login`, formData, {
         headers: { 'Content-Type': 'application/json' },
       });
       

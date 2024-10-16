@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { backURL } from "../../constants";
 const MapPinIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -29,15 +29,15 @@ const CentresDisplayPages = () => {
   const [centres, setCentres] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-
+ 
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCentres = async () => {
       try {
-        console.log("url: ", import.meta.env.VITE_API_URL);
+        
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/centre/getCentres`,
+          `${backURL}/api/centre/getCentres`,
           {
             headers: {
               authorization: `Bearer ${localStorage.getItem("token")}`,

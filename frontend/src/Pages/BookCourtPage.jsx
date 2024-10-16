@@ -1,7 +1,7 @@
 import  { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
-
+import { backURL } from "../../constants";
 const BookCourtPage = () => {
   const [searchParams] = useSearchParams();
   const sportId = searchParams.get("sportId");
@@ -30,7 +30,7 @@ const BookCourtPage = () => {
     }
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/schedule/availableSlots`,
+        `${backURL}/api/schedule/availableSlots`,
         {
           sportId,
           centreId,
@@ -54,7 +54,7 @@ const BookCourtPage = () => {
   const fetchCourts = async () => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/court/getCourt`,
+        `${backURL}/api/court/getCourt`,
         {
           sportId,
         },
@@ -84,7 +84,7 @@ const BookCourtPage = () => {
     });
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/booking/createBooking`,
+        `${backURL}/api/booking/createBooking`,
         {
           court: selectedCourt,
           date: selectedDate,

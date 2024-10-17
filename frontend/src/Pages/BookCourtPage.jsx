@@ -1,18 +1,22 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { backURL } from "../../constants";
+
 const BookCourtPage = () => {
   const [searchParams] = useSearchParams();
   const sportId = searchParams.get("sportId");
   const centreId = searchParams.get("centreId");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [selectedDate, setSelectedDate] = useState("");
   const [timeSlots, setTimeSlots] = useState([]);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [courts, setCourts] = useState([]);
   const [selectedCourt, setSelectedCourt] = useState("");
+
+  // Add a state to control the visibility of the confirmation message
+  const [isBookingConfirmed, setIsBookingConfirmed] = useState(false);
 
   useEffect(() => {
     fetchCourts();
@@ -70,9 +74,10 @@ const BookCourtPage = () => {
       console.error("Error fetching courts:", error);
     }
   };
-   const handleBackClick = () => {
-     navigate("/centrePage");
-   };
+
+  const handleBackClick = () => {
+    navigate("/centrePage");
+  };
 
   const handleSubmit = async () => {
     console.log("data: ", {
@@ -99,6 +104,12 @@ const BookCourtPage = () => {
         }
       );
       console.log("front", res?.data);
+
+      // Show the confirmation message after successful booking
+      setIsBookingConfirmed(true);
+
+      // Automatically hide the confirmation message after 3 seconds
+      setTimeout(() => setIsBookingConfirmed(false), 3000);
     } catch (error) {
       console.log(error);
     }
@@ -110,6 +121,7 @@ const BookCourtPage = () => {
         <h1 className="text-4xl font-extrabold text-center text-indigo-800 mb-12">
           Court Booking
         </h1>
+
         <div className="bg-white shadow-xl rounded-lg overflow-hidden">
           <div className="p-8 space-y-8">
             <div className="space-y-4">
@@ -173,6 +185,11 @@ const BookCourtPage = () => {
             </button>
           </div>
         </div>
+        {isBookingConfirmed && (
+          <div className="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-md shadow-lg animate-bounce">
+            Booking Confirmed!
+          </div>
+        )}
       </div>
     </div>
   );

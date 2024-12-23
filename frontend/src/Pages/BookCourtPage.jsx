@@ -14,12 +14,13 @@ const BookCourtPage = () => {
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [courts, setCourts] = useState([]);
   const [selectedCourt, setSelectedCourt] = useState("");
+  const [courtPrice, setCourtPrice] = useState(0);
 
-  // Add a state to control the visibility of the confirmation message
   const [isBookingConfirmed, setIsBookingConfirmed] = useState(false);
 
   useEffect(() => {
     fetchCourts();
+    fetchDynamicPrice();
   }, []);
 
   useEffect(() => {
@@ -75,11 +76,35 @@ const BookCourtPage = () => {
     }
   };
 
+  const fetchDynamicPrice = async () => {
+    try {
+      const response = await axios.get(
+        `${backURL}/api/sport/getDynamicPrice?sportId=${sportId}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      const data = response?.data;
+      setCourtPrice(data);
+    } catch (error) {
+      console.error("Error fetching courts:", error);
+    }
+  };
+
   const handleBackClick = () => {
     navigate("/centrePage");
   };
 
   const handleSubmit = async () => {
+    const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+
+    if (selectedDate < today) {
+      alert("You cannot book a court for a past date.");
+      return;
+    }
+
     console.log("data: ", {
       court: selectedCourt,
       date: selectedDate,
@@ -125,12 +150,17 @@ const BookCourtPage = () => {
         <div className="bg-white shadow-xl rounded-lg overflow-hidden">
           <div className="p-8 space-y-8">
             <div className="space-y-4">
+              <h2 className="text-2xl font-semibold text-gray-800">Price</h2>
+              <h3 className="text-gray-500">{courtPrice}</h3>
+            </div>
+            <div className="space-y-4">
               <h2 className="text-2xl font-semibold text-gray-800">
                 Select Date
               </h2>
               <input
                 type="date"
                 value={selectedDate}
+                min={new Date().toISOString().split("T")[0]} // Disable past dates
                 onChange={(e) => setSelectedDate(e.target.value)}
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200"
               />
@@ -145,11 +175,12 @@ const BookCourtPage = () => {
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200"
               >
                 <option value="">Select a court</option>
-                {courts.map((court) => (
-                  <option key={court._id} value={court._id}>
-                    {court.name}
-                  </option>
-                ))}
+                {courts &&
+                  courts?.map((court) => (
+                    <option key={court._id} value={court._id}>
+                      {court.name}
+                    </option>
+                  ))}
               </select>
             </div>
             <div className="space-y-4">
@@ -162,7 +193,7 @@ const BookCourtPage = () => {
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200"
               >
                 <option value="">Select a time slot</option>
-                {timeSlots.map((slot, ind) => (
+                {timeSlots?.map((slot, ind) => (
                   <option key={ind} value={slot._id}>
                     {slot.startTime}
                   </option>
@@ -179,7 +210,7 @@ const BookCourtPage = () => {
             </button>
             <button
               onClick={handleBackClick}
-              className="w-full  bg-indigo-600 text-white py-3 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 mt-10 focus:ring-indigo-500 focus:ring-offset-2 transition duration-200 text-lg font-semibold"
+              className="w-full bg-indigo-600 text-white py-3 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 mt-10 focus:ring-indigo-500 focus:ring-offset-2 transition duration-200 text-lg font-semibold"
             >
               Back to Centres
             </button>

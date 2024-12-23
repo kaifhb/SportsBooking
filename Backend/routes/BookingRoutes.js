@@ -1,6 +1,6 @@
 import express from "express";
 
-import { createBooking } from "../controller/Booking.js";
+import { createBooking } from "../controller/Booking.controller.js";
 import { protect } from "../middleware/authMiddleware.js";
  // Assuming the getBookings controller is in the same directory
 

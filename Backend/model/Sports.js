@@ -16,6 +16,17 @@ const SportSchema = new mongoose.Schema({
     ref: "Centre",
     required: true,
   },
+
+  priceFactor: {
+    type: Number,
+    default: 1.0,
+  },
+  
+
+  basePrice: {
+    type: Number, // Base price for the court.
+    required: true,
+  },
 });
 
 export default mongoose.model("Sport", SportSchema);

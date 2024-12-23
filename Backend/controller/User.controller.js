@@ -2,6 +2,8 @@ import User from "../model/Users.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import validator from "validator";
+// const bcrypt = require("bcryptjs");
+
 
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.SECRET_KEY, { expiresIn: "1d" });
@@ -112,4 +114,17 @@ const loginUser = async (req, res) => {
   }
 };
 
-export { registerUser, loginUser };
+const getLoggedInUserDetails = async(req,res)=>{
+  try {
+    console.log('heyyy');
+    let userData = req.user
+
+    
+    res.json({success:true,...userData});
+  } catch (error) {
+    console.error("Server error:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+}
+
+export { registerUser, loginUser, getLoggedInUserDetails };

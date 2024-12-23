@@ -10,7 +10,11 @@ const CentreSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-    
+
+  priceFactor: {
+    type: Number, // Multiplier for base prices across all courts for this sport.
+    default: 1.0,
+  },
 });
 
 export default mongoose.model("Centre", CentreSchema);

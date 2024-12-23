@@ -10,6 +10,8 @@ const CourtSchema = new mongoose.Schema({
     ref: "Sport",
     required: true,
   },
+  
+
 });
 
 export default mongoose.model("Court", CourtSchema);

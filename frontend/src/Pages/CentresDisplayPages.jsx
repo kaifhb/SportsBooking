@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { backURL } from "../../constants";
+import getLoggedInUserDetails from "../Utils/getLoggedInUserDetails";
+
 const MapPinIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -29,8 +31,26 @@ const CentresDisplayPages = () => {
   const [centres, setCentres] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
- 
+ const [user,setUser] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    async function getDetails(){
+      try {
+        const data = await getLoggedInUserDetails();
+        console.log(data);
+        setUser(data)
+        
+      
+      } catch (error) {
+        console.log(error);
+        
+      }
+    }
+    // console.log("sdhjfjd");
+    
+    getDetails();
+  },[])
 
   useEffect(() => {
     const fetchCentres = async () => {
@@ -90,6 +110,12 @@ const CentresDisplayPages = () => {
     );
   }
 
+  const addCentre = ()=>{
+    navigate('/addCentre')
+  }
+
+  
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -127,7 +153,18 @@ const CentresDisplayPages = () => {
               </div>
             </div>
           ))}
+          
         </div>
+
+        {
+          user?.role === 'manager' &&
+          <button 
+            className="mt-20 flex bg-indigo-600 text-white p-2 rounded-xl"
+            onClick={addCentre}
+          >
+            Add Centre
+          </button>
+        }
       </div>
     </div>
   );

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { backURL } from "../../constants";
+import { backURL } from "../../constants.js";
+import getLoggedInUserDetails from "../Utils/getLoggedInUserDetails.js";
 
 const SportsDisplayPage = () => {
   const [searchParams] = useSearchParams();
@@ -9,6 +10,7 @@ const SportsDisplayPage = () => {
   const [sports, setSports] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [user,setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,6 +46,25 @@ const SportsDisplayPage = () => {
       setLoading(false);
     }
   }, [centerId]);
+
+
+  useEffect(()=>{
+    async function getDetails(){
+      try {
+        const data = await getLoggedInUserDetails();
+        // console.log(data);
+        setUser(data)
+        
+      
+      } catch (error) {
+        console.log(error);
+        
+      }
+    }
+    // console.log("sdhjfjd");
+    
+    getDetails();
+  },[])
 
   const handleClick = (sportId) => {
     navigate(`/bookCourt?sportId=${sportId}&centreId=${centerId}`);
@@ -95,21 +116,33 @@ const SportsDisplayPage = () => {
               <div
                 key={sport._id}
                 className="bg-white shadow-lg rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 cursor-pointer"
-                onClick={() => handleClick(sport._id)}
+
               >
                 <div className="p-6">
                   <h2 className="text-2xl font-semibold text-gray-800 mb-3">
                     {sport.name}
                   </h2>
-                  <p className="text-gray-600 mb-2">
+                  {/* <p className="text-gray-600 mb-2">
                     Total Courts: {sport.courts.length}
-                  </p>
+                  </p> */}
                   <p className="text-gray-600">Center: {sport.centre.name}</p>
                 </div>
                 <div className="px-6 py-4 bg-indigo-50">
-                  <button className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-200">
-                    Book Court
-                  </button>
+                  { user.role === 'customer' &&
+                    <button 
+                      onClick={()=>{handleClick(sport._id)}}
+                      className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-200">
+                      Book Court
+                    </button>
+                  }   
+                  { user.role === 'manager' &&
+                    <button className="w-full mt-2 bg-yellow-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-200"
+                      onClick={()=>{navigate(`/addCourt/${sport._id}/${centerId}`)}}
+                    >
+                      Add Court
+                    </button>
+                  } 
+                  
                 </div>
               </div>
             ))}
@@ -120,6 +153,13 @@ const SportsDisplayPage = () => {
           </p>
         )}
       </div>
+      {user.role === 'manager' && <button
+        className="mt-20 flex bg-indigo-600 text-white p-2 rounded-xl"
+        onClick={()=>{navigate(`/addSports?centreId=${centerId}`)}}
+      >
+        Add Sports
+      </button> }
+      
     </div>
   );
 };

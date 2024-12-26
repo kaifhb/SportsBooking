@@ -47,6 +47,53 @@ The backend manages all API requests, user authentication, and database interact
 - **routes/:** Definitions for all API routes 🚦
 - **middleware/:** Custom middleware, such as authentication checks 🛡️
 
+## 📜 API Routes
+
+Here are the available API routes in the backend:
+
+- **User Routes:**
+
+   - `POST /api/user/register`: Register a new user
+   - `POST /api/user/login`: User login with JWT authentication
+   - `GET /api/user/:id`: Get user details (requires authentication)
+   - `PUT /api/user/:id`: Update user information (requires authentication)
+
+- **Booking Routes:**
+
+   - `POST /api/booking`: Create a new booking for a sports court
+   - `GET /api/booking/:userId`: Get all bookings of a user
+   - `DELETE /api/booking/:bookingId`: Cancel a booking
+   - `GET /api/booking/:courtId`: Get bookings for a specific court
+
+- **Centre Routes:**
+
+   - `GET /api/centre`: Get all available sports centres
+   - `POST /api/centre`: Add a new sports centre (admin only)
+   - `GET /api/centre/:id`: Get a specific centre's details
+   - `PUT /api/centre/:id`: Update sports centre details (admin only)
+
+- **Sport Routes:**
+
+   - `GET /api/sport`: Get all available sports types
+   - `POST /api/sport`: Add a new sport type (admin only)
+   - `GET /api/sport/:id`: Get details of a specific sport
+
+- **Court Routes:**
+
+   - `GET /api/court`: Get all available courts
+   - `POST /api/court`: Add a new sports court (admin only)
+   - `GET /api/court/:id`: Get details of a specific court
+   - `PUT /api/court/:id`: Update court details (admin only)
+
+- **Schedule Routes:**
+
+   - `GET /api/schedule/:courtId`: Get the schedule for a specific court
+   - `POST /api/schedule`: Create a new schedule for a court
+   - `PUT /api/schedule/:id`: Update schedule (admin only)
+   - `DELETE /api/schedule/:id`: Delete a court schedule (admin only)
+
+
+
 ### Frontend
 
 The frontend is created using React and Vite for quick development.
